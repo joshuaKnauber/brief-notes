@@ -1,0 +1,68 @@
+.mdxeditor {
+    height: 100%;
+}
+
+.mdxeditor-root-contenteditable {
+    height: 100%;
+}
+
+.editor {
+    height: 100%;
+    padding: 1rem;
+}
+
+.editor h1 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.editor h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.editor h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.editor h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.editor h5 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.editor p {
+    margin-bottom: 1rem;
+}
+
+.editor blockquote {
+    border-left: 3px solid rgba(0, 0, 0, .2);
+    padding-left: .5rem;
+}
+
+.editor li {
+    margin-left: .25rem;
+}
+
+.editor ul {
+    list-style-type: disc;
+}
+
+.editor ol {
+    list-style-type: decimal;
+}
+
+.editor hr {
+    border-top-width: 2px;
+    border-top-color: rgba(0, 0, 0, .1);
+    margin-block: 1.5rem;
+}
+
+.editor a {
+    color: blue
+}

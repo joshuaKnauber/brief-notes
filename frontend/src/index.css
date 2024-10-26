@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "Geist";
+    /* src: url("./assets/fonts/GeistMono.ttf"); */
+    src: url("./assets/fonts/FiraCode.ttf");
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+    font-size: 13px;
+}
+
+* {
+    font-family: "Geist";
+}
+
+.scroll-hide {
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.scroll-hide::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
