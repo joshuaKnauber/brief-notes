@@ -12,7 +12,7 @@ export function Notes() {
 
   if (!settings) return null;
 
-  if (!settings.rootDir) {
+  if (!settings.RootDir) {
     return <Navigate to="/" />;
   }
 

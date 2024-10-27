@@ -5,6 +5,7 @@ import {
   GetListOfFiles,
   CreateNote,
   SaveContent,
+  RenameFile,
 } from "../../../wailsjs/go/main/App";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -21,20 +22,19 @@ export function useFileList() {
   const [filesList, setFilesList] = useAtom(filesListAtom);
   const navigate = useNavigate();
 
-  function refreshFiles() {
-    GetListOfFiles().then((files) =>
-      setFilesList(
-        files
-          .map((f) => ({ ...f, lastSaved: f.lastSaved * 1000 }))
-          .sort((a, b) => b.lastSaved - a.lastSaved)
-      )
+  async function refreshFiles() {
+    const files = await GetListOfFiles();
+    setFilesList(
+      files
+        .map((f) => ({ ...f, lastSaved: f.lastSaved * 1000 }))
+        .sort((a, b) => b.lastSaved - a.lastSaved)
     );
   }
 
   function createFile() {
     const filename = format(new Date(), "MMM dd yyyy',' HH'-'mm'-'ss");
-    CreateNote(filename).then(() => {
-      refreshFiles();
+    CreateNote(filename).then(async () => {
+      await refreshFiles();
       navigate({ to: "/notes/$note", params: { note: filename } });
     });
   }
@@ -42,6 +42,15 @@ export function useFileList() {
   function saveContent(path: string, content: string) {
     // TODO not necessary to refresh all files on every save
     SaveContent(path, content).then(() => refreshFiles());
+  }
+
+  function renameFile(path: string, newName: string) {
+    RenameFile(path, newName).then((success) => {
+      if (success) {
+        refreshFiles();
+        navigate({ to: "/notes/$note", params: { note: newName } });
+      }
+    });
   }
 
   useEffect(() => {
@@ -84,5 +93,5 @@ export function useFileList() {
     remaining,
   };
 
-  return { filesList, fileTimeCategories, createFile, saveContent };
+  return { filesList, fileTimeCategories, createFile, saveContent, renameFile };
 }

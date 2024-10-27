@@ -36,8 +36,14 @@ export function HeaderNotes() {
   const sidebarOpen = useAtomValue(sidebarOpenAtom);
   const { note } = useParams({ strict: false });
   const [name, setName] = useState("");
+  const { filesList, renameFile } = useFileList();
 
-  const onNameUpdate = () => {};
+  const onNameUpdate = () => {
+    const file = filesList.find((f) => f.name === note);
+    if (!file || !name.trim()) return;
+    console.log(file, name);
+    renameFile(file.path, name);
+  };
 
   useEffect(() => {
     setName(note ?? "");
@@ -62,9 +68,9 @@ export function HeaderNotes() {
             />
           </div>
           <div className="flex shrink-0 flex-row gap-2">
-            <IconButton>
+            {/* <IconButton>
               <Icon icon={<PinIcon />} />
-            </IconButton>
+            </IconButton> */}
           </div>
         </>
       )}

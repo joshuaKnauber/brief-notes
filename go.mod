@@ -4,13 +4,9 @@ go 1.22
 
 toolchain go1.22.8
 
-require (
-	github.com/AndreiTelteu/wails-configstore v0.0.2
-	github.com/wailsapp/wails/v2 v2.7.1
-)
+require github.com/wailsapp/wails/v2 v2.7.1
 
 require (
-	github.com/adrg/xdg v0.4.0 // indirect
 	github.com/bep/debounce v1.2.1 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect

@@ -26,6 +26,14 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 }
 
+func (a *App) GetSettings() AppSettings {
+	return getSettings()
+}
+
+func (a *App) WriteSettings(settings AppSettings) {
+	writeSettings(settings)
+}
+
 type MarkdownFile struct {
 	Name      string `json:"name"`
 	Path      string `json:"path"`
@@ -79,4 +87,14 @@ func (a *App) SaveContent(path string, content string) {
 	if err != nil {
 		fmt.Printf("unable to write file: %w", err)
 	}
+}
+
+func (a *App) RenameFile(path string, newName string) bool {
+	newPath := filepath.Join(filepath.Dir(path), newName+".md")
+	err := os.Rename(path, newPath)
+	if err != nil {
+		fmt.Printf("unable to rename file: %w", err)
+		return false
+	}
+	return true
 }

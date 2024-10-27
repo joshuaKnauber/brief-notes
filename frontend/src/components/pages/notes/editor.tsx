@@ -25,7 +25,6 @@ export function Editor() {
 
   useEffect(() => {
     // initialize
-    markdownRef.current?.focus();
     const editor = document.querySelector(".editor");
     editor?.setAttribute("spellcheck", "false");
   }, []);
@@ -49,6 +48,7 @@ export function Editor() {
       ]}
       contentEditableClassName="editor"
       trim={false}
+      autoFocus
       onChange={(markdown) => {
         setMarkdown(markdown);
         saveContent(file.path, markdown);

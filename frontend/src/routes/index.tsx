@@ -11,7 +11,7 @@ export function Home() {
 
   if (!settings) return null;
 
-  if (settings.rootDir) {
+  if (settings.RootDir) {
     return <Navigate to="/notes" />;
   }
 
