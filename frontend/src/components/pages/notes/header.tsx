@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { sidebarOpenAtom } from "./atoms/sidebar";
 import { IconButton } from "../../buttons/iconButton";
 import { PanelLeft, PinIcon, PlusIcon } from "lucide-react";
@@ -16,7 +16,7 @@ export function HeaderSidebar() {
       className={twMerge(
         "flex shrink-0 flex-row justify-between h-12 px-2 items-center transition-all duration-100",
         sidebarOpen
-          ? "border-r border-black/20 bg-neutral-100 w-[230px]"
+          ? "border-r border-black/20 bg-neutral-50 w-[230px]"
           : "w-12"
       )}
     >
@@ -33,6 +33,7 @@ export function HeaderSidebar() {
 }
 
 export function HeaderNotes() {
+  const sidebarOpen = useAtomValue(sidebarOpenAtom);
   const { note } = useParams({ strict: false });
   const [name, setName] = useState("");
 
@@ -46,9 +47,14 @@ export function HeaderNotes() {
     <div className="flex shrink-0 flex-row h-12 px-2 justify-between items-center gap-4">
       {note && (
         <>
-          <div className="flex flex-row items-center ml-2 gap-2 flex-grow">
+          <div
+            className={twMerge(
+              "flex flex-row items-center gap-2 flex-grow transition-all ml-0",
+              sidebarOpen && "ml-2"
+            )}
+          >
             <input
-              className="font-semibold focus:outline-none flex-grow"
+              className="font-semibold text-sm focus:outline-none flex-grow"
               placeholder="File Name..."
               value={name}
               onChange={(e) => setName(e.target.value)}

@@ -6,10 +6,11 @@ import {
   quotePlugin,
   thematicBreakPlugin,
   linkPlugin,
+  MDXEditorMethods,
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import "./editor.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFileList } from "../../../lib/hooks/useFileList";
 import { useParams } from "@tanstack/react-router";
 
@@ -18,12 +19,22 @@ export function Editor() {
   const { saveContent, filesList } = useFileList();
   const file = filesList.find((f) => f.name === note);
 
+  const markdownRef = useRef<MDXEditorMethods>(null);
+
   const [markdown, setMarkdown] = useState<string>(file?.content ?? "");
+
+  useEffect(() => {
+    // initialize
+    markdownRef.current?.focus();
+    const editor = document.querySelector(".editor");
+    editor?.setAttribute("spellcheck", "false");
+  }, []);
 
   if (!file) return <span>FILE NOT FOUND</span>;
 
   return (
     <MDXEditor
+      ref={markdownRef}
       placeholder="Start typing..."
       markdown={markdown}
       plugins={[
@@ -36,8 +47,8 @@ export function Editor() {
         linkPlugin({}),
         markdownShortcutPlugin(),
       ]}
-      autoFocus
       contentEditableClassName="editor"
+      trim={false}
       onChange={(markdown) => {
         setMarkdown(markdown);
         saveContent(file.path, markdown);

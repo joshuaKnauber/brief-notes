@@ -1,6 +1,6 @@
 import { atom, useAtom } from "jotai";
 import { useEffect } from "react";
-import { format, isAfter, isToday, subDays } from "date-fns";
+import { format, isAfter, subDays, subHours } from "date-fns";
 import {
   GetListOfFiles,
   CreateNote,
@@ -55,7 +55,9 @@ export function useFileList() {
 
   const pinned: MarkdownFile[] = [];
   const today = filesList.filter(
-    (f) => isToday(f.lastSaved) && !pinned.some((p) => isSameFile(p, f))
+    (f) =>
+      isAfter(f.lastSaved, subHours(new Date(), 24)) &&
+      !pinned.some((p) => isSameFile(p, f))
   );
   const last7Days = filesList.filter(
     (f) =>

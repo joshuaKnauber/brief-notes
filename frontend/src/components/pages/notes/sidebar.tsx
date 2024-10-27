@@ -29,7 +29,7 @@ export function Sidebar() {
         open ? "w-[230px]" : "w-0"
       )}
     >
-      <div className="scroll-hide w-[230px] h-[calc(100vh-3rem)] bg-neutral-100 border-r border-black/20 overflow-y-auto">
+      <div className="scroll-hide w-[230px] h-[calc(100vh-3rem)] bg-neutral-50 border-r border-black/20 overflow-y-auto">
         <div className="h-auto w-full flex flex-col">
           {fileTimeCategories.pinned.length > 0 && (
             <>
@@ -39,7 +39,7 @@ export function Sidebar() {
               </div>
               {fileTimeCategories.pinned.map((l, i) => (
                 <NoteItem
-                  key={i}
+                  key={l.path}
                   name={l.name}
                   lastEdit={new Date(l.lastSaved)}
                 />

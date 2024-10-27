@@ -15,8 +15,8 @@ export function NoteItem({ name, lastEdit }: NoteItemProps) {
       to="/notes/$note"
       params={{ note: name }}
       className={twMerge(
-        "flex flex-col hover:bg-neutral-200 select-none transition-all py-3 px-4 rounded-md",
-        active && "bg-neutral-200"
+        "flex flex-col select-none py-3 px-4",
+        active ? "bg-neutral-200" : "transition-all hover:bg-neutral-200"
       )}
     >
       <span className="text-sm font-semibold">{name}</span>

@@ -13,3 +13,4 @@ styling
 shortcuts
 pinned files
 links
+linebreaks
