@@ -32,7 +32,7 @@ export function useFileList() {
   }
 
   function createFile() {
-    const filename = format(new Date(), "dd MMM yyyy HH'h' mm'm' ss's'");
+    const filename = format(new Date(), "MMM dd yyyy',' HH'-'mm'-'ss");
     CreateNote(filename).then(() => {
       refreshFiles();
       navigate({ to: "/notes/$note", params: { note: filename } });
