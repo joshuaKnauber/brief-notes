@@ -1,35 +1,28 @@
 import { useEffect, useState } from "react";
 import { z } from "zod";
-import { GetSettings, WriteSettings } from "../../../wailsjs/go/main/App";
+import { GetPath, UpdatePath } from "../../../wailsjs/go/main/App";
+import { atom, useAtom } from "jotai";
 
-const settingsSchema = z.object({
-  RootDir: z.string(),
-});
-type Settings = z.infer<typeof settingsSchema>;
-const defaultSettings: Settings = {
-  RootDir: "",
-};
+const loadedAtom = atom(false);
+const rootDirAtom = atom("");
 
 export function useSettings() {
-  const [settings, setSettings] = useState<null | Settings>(null);
+  const [loaded, setLoaded] = useAtom(loadedAtom);
+  const [rootDir, setRootDir] = useAtom(rootDirAtom);
 
   function updateRootDir(path: string) {
-    if (!settings) return;
-    const newSettings = { ...settings, rootDir: path };
-    WriteSettings(newSettings).then(refreshSettings);
+    UpdatePath(path).then(refreshSettings);
   }
 
-  function refreshSettings() {
-    GetSettings().then((s) => {
-      const { data, success, error } = settingsSchema.safeParse(s);
-      setSettings(success ? data : defaultSettings);
-      console.log(error);
-    });
+  async function refreshSettings() {
+    const rootDir = await GetPath();
+    setRootDir(rootDir);
+    setLoaded(true);
   }
 
   useEffect(() => {
     refreshSettings();
   }, []);
 
-  return { settings, updateRootDir };
+  return { loaded, rootDir, updateRootDir };
 }

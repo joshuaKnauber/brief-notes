@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "theme-bg": "white",
+        "theme-text": "black",
+        "theme-text-low-contrast": "#737373",
+      }
+    },
     fontSize: {
       "xs": ".8rem",
       "sm": ".9rem",

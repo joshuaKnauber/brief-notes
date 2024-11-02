@@ -10,8 +10,12 @@ export function GetListOfFiles() {
   return window['go']['main']['App']['GetListOfFiles']();
 }
 
-export function GetSettings() {
-  return window['go']['main']['App']['GetSettings']();
+export function GetPath() {
+  return window['go']['main']['App']['GetPath']();
+}
+
+export function GetRootDir() {
+  return window['go']['main']['App']['GetRootDir']();
 }
 
 export function RenameFile(arg1, arg2) {
@@ -22,6 +26,10 @@ export function SaveContent(arg1, arg2) {
   return window['go']['main']['App']['SaveContent'](arg1, arg2);
 }
 
-export function WriteSettings(arg1) {
-  return window['go']['main']['App']['WriteSettings'](arg1);
+export function SetRootDir(arg1) {
+  return window['go']['main']['App']['SetRootDir'](arg1);
+}
+
+export function UpdatePath(arg1) {
+  return window['go']['main']['App']['UpdatePath'](arg1);
 }

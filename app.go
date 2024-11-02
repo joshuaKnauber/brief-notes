@@ -23,15 +23,10 @@ func NewApp() *App {
 // startup is called when the app starts. The context is saved
 // so we can call the runtime methods
 func (a *App) startup(ctx context.Context) {
+
+	initStore()
+
 	a.ctx = ctx
-}
-
-func (a *App) GetSettings() AppSettings {
-	return getSettings()
-}
-
-func (a *App) WriteSettings(settings AppSettings) {
-	writeSettings(settings)
 }
 
 type MarkdownFile struct {
@@ -97,4 +92,15 @@ func (a *App) RenameFile(path string, newName string) bool {
 		return false
 	}
 	return true
+}
+
+func (a *App) GetRootDir() string {
+	return PATH
+	// viper.ReadInConfig()
+	// return viper.GetString("rootDir")
+}
+
+func (a *App) SetRootDir(dir string) {
+	// viper.Set("rootDir", dir)
+	// viper.WriteConfig()
 }

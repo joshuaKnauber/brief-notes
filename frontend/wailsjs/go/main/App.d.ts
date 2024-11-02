@@ -6,10 +6,14 @@ export function CreateNote(arg1:string):Promise<void>;
 
 export function GetListOfFiles():Promise<Array<main.MarkdownFile>>;
 
-export function GetSettings():Promise<main.AppSettings>;
+export function GetPath():Promise<string>;
+
+export function GetRootDir():Promise<string>;
 
 export function RenameFile(arg1:string,arg2:string):Promise<boolean>;
 
 export function SaveContent(arg1:string,arg2:string):Promise<void>;
 
-export function WriteSettings(arg1:main.AppSettings):Promise<void>;
+export function SetRootDir(arg1:string):Promise<void>;
+
+export function UpdatePath(arg1:string):Promise<void>;

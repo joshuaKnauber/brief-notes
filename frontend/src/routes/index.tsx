@@ -7,11 +7,12 @@ export const Route = createFileRoute("/")({
 });
 
 export function Home() {
-  const { settings } = useSettings();
+  const { loaded, rootDir } = useSettings();
+  console.log(loaded, rootDir);
 
-  if (!settings) return null;
+  if (!loaded) return null;
 
-  if (settings.RootDir) {
+  if (rootDir) {
     return <Navigate to="/notes" />;
   }
 

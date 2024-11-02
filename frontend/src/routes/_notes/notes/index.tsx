@@ -7,7 +7,8 @@ export const Route = createFileRoute("/_notes/notes/")({
 });
 
 export function EmptyNote() {
-  const { createFile, fileTimeCategories } = useFileList();
+  const { createFile, filesList } = useFileList();
+  const orderedFiles = filesList.sort((a, b) => b.lastSaved - a.lastSaved);
   return (
     <div className="flex items-center justify-center flex-col h-full flex-grow gap-8 select-none">
       <button onClick={createFile} className="flex flex-col items-center gap-1">
@@ -15,18 +16,16 @@ export function EmptyNote() {
         <span className="font-semibold">New File</span>
       </button>
       <div className="flex flex-col items-center gap-1.5">
-        {[...fileTimeCategories.pinned, ...fileTimeCategories.today]
-          .slice(0, 5)
-          .map((f, i) => (
-            <Link
-              key={i}
-              to="/notes/$note"
-              params={{ note: f.name }}
-              className="font-medium text-sm text-neutral-400 underline"
-            >
-              {f.name}
-            </Link>
-          ))}
+        {orderedFiles.slice(0, 5).map((f, i) => (
+          <Link
+            key={i}
+            to="/notes/$note"
+            params={{ note: f.name }}
+            className="font-medium text-sm text-neutral-400 underline"
+          >
+            {f.name}
+          </Link>
+        ))}
       </div>
     </div>
   );

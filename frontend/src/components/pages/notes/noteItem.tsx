@@ -20,7 +20,7 @@ export function NoteItem({ name, lastEdit }: NoteItemProps) {
       )}
     >
       <span className="text-sm font-semibold">{name}</span>
-      <span className="text-sm text-black/80">
+      <span className="text-xs text-black/80">
         {formatRelative(lastEdit, new Date())}
       </span>
     </Link>

@@ -8,11 +8,11 @@ export const Route = createFileRoute("/_notes")({
 });
 
 export function Notes() {
-  const { settings } = useSettings();
+  const { loaded, rootDir } = useSettings();
 
-  if (!settings) return null;
+  if (!loaded) return null;
 
-  if (!settings.RootDir) {
+  if (!rootDir) {
     return <Navigate to="/" />;
   }
 
