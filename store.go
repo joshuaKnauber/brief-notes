@@ -74,12 +74,12 @@ func (app *App) UpdatePath(newPath string) error {
 	return nil
 }
 
-// GetPath function to retrieve the current path directly from the config file
-func (app *App) GetPath() (string, error) {
+func getPath() string {
 	// Open the config file
 	file, err := os.Open(configFilePath)
 	if err != nil {
-		return "", fmt.Errorf("failed to open config file: %v", err)
+		fmt.Println("failed to open config file: %v", err)
+		return ""
 	}
 	defer file.Close()
 
@@ -88,9 +88,15 @@ func (app *App) GetPath() (string, error) {
 	decoder := json.NewDecoder(file)
 	err = decoder.Decode(&config)
 	if err != nil {
-		return "", fmt.Errorf("failed to decode config: %v", err)
+		fmt.Println("failed to decode config: %v", err)
+		return ""
 	}
 
 	fmt.Println("Retrieved path:", config.RootDir)
-	return config.RootDir, nil
+	return config.RootDir
+}
+
+// GetPath function to retrieve the current path directly from the config file
+func (app *App) GetPath() string {
+	return getPath()
 }

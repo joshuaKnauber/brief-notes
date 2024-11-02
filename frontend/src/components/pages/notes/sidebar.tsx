@@ -9,7 +9,7 @@ import { PinIcon } from "lucide-react";
 
 export function Sidebar() {
   const [open, setOpen] = useAtom(sidebarOpenAtom);
-  const { fileTimeCategories } = useFileList();
+  const { fileTimeCategories, filesList } = useFileList();
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -31,6 +31,11 @@ export function Sidebar() {
     >
       <div className="scroll-hide w-[230px] h-[calc(100vh-3rem)] bg-neutral-50 border-r border-black/20 overflow-y-auto">
         <div className="h-auto w-full flex flex-col">
+          {filesList.length === 0 && (
+            <span className="mt-2 text-sm font-semibold px-4">
+              No Files Found
+            </span>
+          )}
           {fileTimeCategories.pinned.length > 0 && (
             <>
               <div className="flex flex-row items-center text-neutral-500 gap-2 px-4 select-none mb-1 mt-2">

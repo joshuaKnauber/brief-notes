@@ -8,8 +8,6 @@ import (
 	"strings"
 )
 
-const PATH = "C:\\Users\\Joshua\\Documents\\Brief"
-
 // App struct
 type App struct {
 	ctx context.Context
@@ -37,7 +35,8 @@ type MarkdownFile struct {
 }
 
 func (a *App) GetListOfFiles() []MarkdownFile {
-	items, err := os.ReadDir(PATH)
+	path := getPath()
+	items, err := os.ReadDir(path)
 	if err != nil {
 		return make([]MarkdownFile, 0)
 	}
@@ -48,7 +47,7 @@ func (a *App) GetListOfFiles() []MarkdownFile {
 			continue
 		}
 
-		filePath := filepath.Join(PATH, fileName)
+		filePath := filepath.Join(path, fileName)
 		info, err := item.Info()
 		if err != nil {
 			continue
@@ -71,7 +70,8 @@ func (a *App) GetListOfFiles() []MarkdownFile {
 }
 
 func (a *App) CreateNote(filename string) {
-	err := os.WriteFile(filepath.Join(PATH, filename+".md"), []byte(""), 0755)
+	path := getPath()
+	err := os.WriteFile(filepath.Join(path, filename+".md"), []byte(""), 0755)
     if err != nil {
         fmt.Printf("unable to write file: %w", err)
     }

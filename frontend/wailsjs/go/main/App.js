@@ -14,20 +14,12 @@ export function GetPath() {
   return window['go']['main']['App']['GetPath']();
 }
 
-export function GetRootDir() {
-  return window['go']['main']['App']['GetRootDir']();
-}
-
 export function RenameFile(arg1, arg2) {
   return window['go']['main']['App']['RenameFile'](arg1, arg2);
 }
 
 export function SaveContent(arg1, arg2) {
   return window['go']['main']['App']['SaveContent'](arg1, arg2);
-}
-
-export function SetRootDir(arg1) {
-  return window['go']['main']['App']['SetRootDir'](arg1);
 }
 
 export function UpdatePath(arg1) {
