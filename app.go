@@ -93,14 +93,3 @@ func (a *App) RenameFile(path string, newName string) bool {
 	}
 	return true
 }
-
-func (a *App) GetRootDir() string {
-	return PATH
-	// viper.ReadInConfig()
-	// return viper.GetString("rootDir")
-}
-
-func (a *App) SetRootDir(dir string) {
-	// viper.Set("rootDir", dir)
-	// viper.WriteConfig()
-}
