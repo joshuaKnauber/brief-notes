@@ -2,25 +2,40 @@ import { useAtom } from "jotai";
 import { twMerge } from "tailwind-merge";
 import { sidebarOpenAtom } from "./atoms/sidebar";
 import { useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate, useParams } from "@tanstack/react-router";
 import { useFileList } from "../../../lib/hooks/useFileList";
 import { NoteItem } from "./noteItem";
 import { PinIcon } from "lucide-react";
 
 export function Sidebar() {
   const [open, setOpen] = useAtom(sidebarOpenAtom);
+  const navigate = useNavigate();
+  const { note } = useParams({ strict: false });
   const { fileTimeCategories, filesList } = useFileList();
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Tab" && e.ctrlKey) {
+      const withControl = e.metaKey || e.ctrlKey;
+      if (e.key === "b" && withControl) {
+        e.preventDefault();
         setOpen(!open);
+      } else if (e.key === "Tab" && withControl) {
+        e.preventDefault();
+        if (filesList.length === 0) return;
+        const current = filesList.findIndex((f) => f.name === note) ?? 0;
+        const offset = e.shiftKey ? -1 : 1;
+        navigate({
+          to: "/notes/$note",
+          params: {
+            note: filesList.at((current + offset) % filesList.length)!.name,
+          },
+        });
       }
     };
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
+  }, [open, filesList, note]);
 
   return (
     <div

@@ -13,10 +13,14 @@
 .editor {
     flex-grow: 1;
     padding: 1rem;
+    
+    padding-left: calc(50% - 300px);
+    padding-right: calc(50% - 300px);
 }
 
 .editor p {
     padding-bottom: .75rem;
+    font-size: 0.925rem;
 }
 
 .editor h1 {
@@ -58,16 +62,17 @@
 }
 
 .editor blockquote {
-    border-left: 2px solid rgba(0, 0, 0, .2);
+    border-left: 3px solid rgba(0, 0, 0, 1);
     padding-left: .5rem;
     margin-top: .5rem;
     margin-bottom: 1rem;
-    font-size: .9rem;
+    font-size: .925rem;
 }
 
 .editor li {
     margin: 0px;
     margin-bottom: .1rem;
+    font-size: 0.925rem;
 }
 
 .editor ul {

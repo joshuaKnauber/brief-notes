@@ -22,9 +22,10 @@ export function Editor() {
   const markdownRef = useRef<MDXEditorMethods>(null);
 
   const [markdown, setMarkdown] = useState<string>(file?.content ?? "");
+  const lastSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // initialize
   useEffect(() => {
-    // initialize
     const editor = document.querySelector(".editor");
     editor?.setAttribute("spellcheck", "false");
   }, []);
@@ -51,7 +52,13 @@ export function Editor() {
       autoFocus
       onChange={(markdown) => {
         setMarkdown(markdown);
-        saveContent(file.path, markdown);
+        // save to file with debounce
+        if (lastSaveTimer.current) {
+          clearTimeout(lastSaveTimer.current);
+        }
+        lastSaveTimer.current = setTimeout(() => {
+          saveContent(file.path, markdown);
+        }, 100);
       }}
     />
   );

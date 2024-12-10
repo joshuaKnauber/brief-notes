@@ -3,29 +3,8 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: "SpaceMono";
-    src: url("./assets/fonts/SpaceMono/SpaceMono-Regular.ttf");
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: "SpaceMono";
-    src: url("./assets/fonts/SpaceMono/SpaceMono-Italic.ttf");
-    font-weight: 500;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "SpaceMono";
-    src: url("./assets/fonts/SpaceMono/SpaceMono-Bold.ttf");
-    font-weight: 700;
-}
-
-@font-face {
-    font-family: "SpaceMono";
-    src: url("./assets/fonts/SpaceMono/SpaceMono-BoldItalic.ttf");
-    font-weight: 700;
-    font-style: italic;
+    font-family: "Geist Mono";
+    src: url("./assets/fonts/GeistMono.ttf");
 }
 
 html {
@@ -36,16 +15,16 @@ html {
 }
 
 * {
-    font-family: "SpaceMono";
+    font-family: "Geist Mono";
 }
 
 .scroll-hide {
     overflow-y: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-.scroll-hide::-webkit-scrollbar { /* WebKit */
+.scroll-hide::-webkit-scrollbar {
     width: 0;
     height: 0;
 }
